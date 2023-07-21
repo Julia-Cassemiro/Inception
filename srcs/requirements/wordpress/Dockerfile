@@ -1,10 +1,10 @@
 FROM debian:buster
 
 # argumentos das vaariaveis de ambiente
-ARG MYSQL_HOST
-ARG MYSQL_DATABASE
-ARG MYSQL_USER
-ARG MYSQL_PASSWORD
+# ARG MYSQL_HOST
+# ARG MYSQL_DATABASE
+# ARG MYSQL_USER
+# ARG MYSQL_PASSWORD
 
 # Instala as dependências
 RUN apt-get update && apt-get install -y \
@@ -41,14 +41,14 @@ WORKDIR /var/www/wordpress/
 RUN sed -i 's/listen\s*=\s*.*/listen = 0.0.0.0:9000/g' /etc/php/7.3/fpm/pool.d/www.conf
 
 # Configura o wordpress copiando alguns arquivos e alterando as variaveis do banco de dados no arquivo wp-config (linhas 47 a 50)
-RUN cp wp-config-sample.php wp-config.php && \
-	sleep 5s && \
-	mv wp-config-sample.php /var/www/wordpress/wp-config.php && \
-	sed -i "s/username_here/$MYSQL_USER/g" /var/www/wordpress/wp-config.php && \
-	sed -i "s/password_here/$MYSQL_PASSWORD/g" /var/www/wordpress/wp-config.php && \
-	sed -i "s/localhost/$MYSQL_HOST/g" /var/www/wordpress/wp-config.php && \
-	sed -i "s/database_name_here/$MYSQL_DATABASE/g" /var/www/wordpress/wp-config.php && \
-	chown -R www-data:www-data /var/www/wordpress
+# RUN cp wp-config-sample.php wp-config.php && \
+# 	sleep 5s && \
+# 	mv wp-config-sample.php /var/www/wordpress/wp-config.php && \
+# 	sed -i "s/username_here/$MYSQL_USER/g" /var/www/wordpress/wp-config.php && \
+# 	sed -i "s/password_here/$MYSQL_PASSWORD/g" /var/www/wordpress/wp-config.php && \
+# 	sed -i "s/localhost/$MYSQL_HOST/g" /var/www/wordpress/wp-config.php && \
+# 	sed -i "s/database_name_here/$MYSQL_DATABASE/g" /var/www/wordpress/wp-config.php && \
+# 	chown -R www-data:www-data /var/www/wordpress
 
 
 # Abre a porta 9000 para o php-fpm

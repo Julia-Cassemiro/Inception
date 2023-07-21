@@ -1,4 +1,5 @@
 all: hosts
+	@sudo mkdir -p ~/jgomes-c/data/wordpress && sudo mkdir -p ~/jgomes-c/data/mariadb
 	@docker-compose -f srcs/docker-compose.yml up -d --build
 
 hosts:
@@ -24,5 +25,7 @@ clean:
 		docker network rm $$(docker network ls -q);\
 		sudo rm -rf /etc/hosts
 		sudo mv ./host_backup /etc/hosts
+		sudo rm -rf ~/jgomes-c/data/mariadb 
+		sudo rm -rf ~/jgomes-c/data/wordpress
 
 .PHONY: all re down clean

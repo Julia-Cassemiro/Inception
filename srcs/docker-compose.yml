@@ -5,20 +5,17 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-      args:
-        MYSQL_DATABASE: ${MYSQL_DATABASE}
-        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-        MYSQL_USER: ${MYSQL_USER}
-        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    image: mariadb
     container_name: mariadb
     restart: always
-    ports:
-            - "3306:3306"
-    volumes:
-      - db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     networks:
       - inception-network
+    volumes:
+      - db:/var/lib/mysql
 
   nginx:
     depends_on:
@@ -39,11 +36,11 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-      args:
-        MYSQL_HOST: ${MYSQL_HOST}
-        MYSQL_DATABASE: ${MYSQL_DATABASE}
-        MYSQL_USER: ${MYSQL_USER}
-        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      # args:
+        # MYSQL_HOST: ${MYSQL_HOST}
+        # MYSQL_DATABASE: ${MYSQL_DATABASE}
+        # MYSQL_USER: ${MYSQL_USER}
+        # MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     depends_on:
       - mariadb
     image: wordpress
