@@ -11,6 +11,7 @@ RUN mkdir -p /var/lib/mysql /var/run/mysqld \
 EXPOSE 3306
 
 COPY ./conf/my.cnf /etc/mysql/mariadb.conf.d
+COPY ./conf/mariadb.sql /
 COPY ./tools/script.sh /usr/local/bin/script.sh
 
 RUN chmod +x /usr/local/bin/script.sh

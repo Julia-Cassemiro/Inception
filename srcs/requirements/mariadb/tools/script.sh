@@ -33,5 +33,6 @@ _EOF_
 # Needed to stop service in order to run CMD mysqld in Dockerfile
 mysqladmin -uroot -p$db_root_password shutdown
 
+mysql -uroot -p$db_root_password $db_database < mariadb.sql ;
 
 exec "$@"
