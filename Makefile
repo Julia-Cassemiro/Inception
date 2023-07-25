@@ -1,6 +1,6 @@
 all: hosts
 	@sudo mkdir -p ~/jgomes-c/data/wordpress && sudo mkdir -p ~/jgomes-c/data/mariadb
-	@docker-compose -f srcs/docker-compose.yml up -d --build
+	@docker-compose -f srcs/docker-compose.yml --env-file ./srcs/.env up -d --build
 
 hosts:
 	@if [ "$(DOMAIN)" != "jgomes-c.42.fr" ]; then \
